@@ -10,23 +10,25 @@ But, Philips being Philips, they:
 * ...and because of a presumed public uproar, they kept the old 'V1' amd the new 'V2' APIs working alongside each other, which complicates things
 * Now Philips lights are not even Philips lights, but it still says Philips on the box. Classic.
 
+So understandably this became a mess, and I didn't see any recent (as of, 2024) projects with these lights.
+
 ## Why
 
  I don't care about the home automation stuff. I especially don't want to connect any home automation stuff to the Internet. I don't want to change light parameters every millisecond to music, but I do, ever so desperately want to occasionally change the colour and to dim all my lights together in a controlled and precise manner. I have a bunch of these lights and I also want them to display the same chromaticity and luminance output that I set. I also want them to be wide spectrum so I can see what I am doing at my desk.
 
- Apparently that is too much to ask and nobody did such a thing, so I read the docs and created this Python script.
+ Apparently that is too much to ask and (again, as far as I know) nobody did such a thing, so I read the docs and created this Python script.
 
 ## How does it work?
 
  The initial assumption is that the Hue system is properly set up with the usual tools. If it works with the app, it will work with this code as well. It doesn't matter if you assign them to a 'scene' or 'room' or 'group' or what type you set them up as, or what you named them.
 
-Initially, you'll need to press the button on the Hue Bridge to create your key. This is saved as a json file. Then, the code gets your lights, and logs the IDs. For each light it sets to `xy' mode, tosses your chromaticity coordinates and intensity percentage, and that's it. The lights are in xy mode, so they are prepared for all sorts of renderable chromaticities. This ensures that all the LEDs are used. The actual mixing of LED intensities within the light source ('bulb', or 'lamp', you get the idea) is not controlled by this script, but rather, it is controlled by the internal MCU in the light sources.
+Initially, you'll need to press the button on the Hue Bridge to create your key. This is saved as a json file. Then, the code gets your lights, and logs the IDs. For each light it sets to `xy' mode, tosses your chromaticity coordinates and intensity percentage, and that's it. The lights are in xy mode, so they are prepared for all sorts of renderable chromaticities. This ensures that all the LEDs are used. The actual mixing of LED intensities within the light source ('bulb', or 'lamp', you get the idea) is not controlled by this script, but rather, it is controlled by the internal MCU inside each light source.
 
  If you are able to and need to, verify the chromaticity outputs with a suitable optical instrument.
 
- Since the 'new'API uses https and other goodies, there is a rate limit of 10 requests per second for setting each light. If you have a large number of lights, this will manifest as a scrolling effect as the new settings will be uploaded to each light.
+ Since the 'new' API uses https and other goodies, there is a rate limit of 10 requests per second for setting each light. If you have a large number of lights, this will manifest as a scrolling effect as the new settings will be uploaded to each light.
 
- If there is a problems and something stops working, then try deleting the json files. If you get connectivity issues, try checking whether the Hue Bridge is still on the same local IP address.
+ If there is a problem and something stops working, then try deleting the json files. If you get connectivity issues, try checking whether the Hue Bridge is still on the same local IP address, and that the IP address of the Hue Bridge matches with what is inside the Python script.
 
 ### Usage
 
@@ -38,9 +40,9 @@ Initially, you'll need to press the button on the Hue Bridge to create your key.
 
 The first and second arguments are the CIE 1931 chromaticity coordinates, and the third argument is the intensity in percent [0 ... 100%].
 
-If you don't specify any of these input arguments, the code will set your lights to these above values. The code sets the lights so that the last values are set are used as defaults when they are power-cycled. So, next time you turn these on, they will be exactly the same how you set them.
+If you don't specify any of these input arguments or you try to do something silly such as giving impossible colours, the code will set your lights to these above values. You will get an error message in the console. If the error message comes from the script, it will be clear and straightforward, if it comes from the light system, you will get a json object and you have to manually process it. The code sets the lights so that the last values are set are used as defaults when they are power-cycled. So, next time you turn these on, they will be exactly the same how you set them.
 
-**note**: There are some sanity checks and error management in the code, but it is not entirely foolproof. There are better and more user-friendly solutions for end-users. I just got upset that I couldn't calibrate these lights easily and threw in about 10 hours of work (of reading, some programming, testing, and documenting) to make this.
+**note**: There are some sanity checks and error management in the code, but it is not entirely foolproof. There are better and more user-friendly solutions for end-users. I just got upset that I couldn't calibrate these lights easily and threw in about 10 hours of work (of reading, some programming, testing, and documenting and admittedly some swearing about what happened to 'let's make things better') to make this.
 
 ## How to start from scratch
 
@@ -60,4 +62,4 @@ If you don't specify any of these input arguments, the code will set your lights
 
 ## Verification and results
 
-...as and when I can get my hands on a chromameter. They are not cheap.
+...as and when I can get my hands on a chromameter and create a set-up where I can make some precision optical measurements. These instruments are not cheap, and it is very difficult to get surfaces that are pure white or pure black.

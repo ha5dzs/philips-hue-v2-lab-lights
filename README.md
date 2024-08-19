@@ -1,4 +1,4 @@
-# Lab lights with the Philips Hue system (V2 CLIP API)
+# Lab lights with the Philips Hue system with the Hue V2 CLIP API (i.e. the 'new' one)
 
 I like decent lights. As someone involved in vision science and knowing what a decent light is, I find bad colour rendering, flickering and off-white colours annoying in a workplace and/or lab environment. Just like with monitors, most people that I know of tends to save a buck or two on devices that are supposed to work with humans. This comes at a cost of increased fatigue and low productivity. Following this logic, I bit the bullet and bought some Philips Hue lights. I found that all the applications are geared towards home automation and entertainment. These lights can be so much more. Each of these have an RGBwWcW array, and it seems that the colour mixing in RGB mode is working reasonably well.
 

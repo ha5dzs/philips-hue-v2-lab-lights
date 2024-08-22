@@ -54,7 +54,7 @@ If you don't specify any of these input arguments or you try to do something sil
     pip install urllib3 requests
 ```
 
- To use this code, you will need the IP address of your bridge. By default, tt looks for DHCP, so the IP address will be assigned by your router. You can use [nmap](https://nmap.org/download.html) or [arp](https://en.wikipedia.org/wiki/Address_Resolution_Protocol) to find it, or you can use [this tool written by Philips that runs in your browser](https://discovery.meethue.com/) to find the IP address of your Hue Bridge.
+ To use this code, you will need the IP address of your bridge. By default, it looks for DHCP, so the IP address will be assigned by your router. You can use [nmap](https://nmap.org/download.html) or [arp](https://en.wikipedia.org/wiki/Address_Resolution_Protocol) to find it, or you can use [this tool written by Philips that runs in your browser](https://discovery.meethue.com/) to find the IP address of your Hue Bridge.
 
  **Change the IP address in the Python script so it would point to your own Hue Bridge!**
 

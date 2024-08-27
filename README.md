@@ -20,7 +20,7 @@ So understandably this became a mess, and I didn't see any recent (as of, 2024) 
 
 ## How does it work?
 
- The initial assumption is that the Hue system is properly set up with the usual tools. If it works with the app, it will work with this code as well. It doesn't matter if you assign them to a 'scene' or 'room' or 'group' or what type you set them up as, or what you named them.
+ The initial assumption is that the Hue system is properly set up with the usual tools. If it works with the Hue app (through the Hue Bridge, and not Bluetooth!), it will work with this code as well. It doesn't matter if you assign them to a 'scene' or 'room' or 'group' or what type you set them up as, or what you named them.
 
 Initially, you'll need to press the button on the Hue Bridge to create your key. This is saved as a json file. Then, the code gets your lights, and logs the IDs. For each light it sets to `xy' mode, tosses your chromaticity coordinates and intensity percentage, and that's it. The lights are in xy mode, so they are prepared for all sorts of renderable chromaticities. This ensures that all the LEDs are used. The actual mixing of LED intensities within the light source ('bulb', or 'lamp', you get the idea) is not controlled by this script, but rather, it is controlled by the internal MCU inside each light source.
 
@@ -46,7 +46,7 @@ If you don't specify any of these input arguments or you try to do something sil
 
 ## How to start from scratch
 
- Install the Hue Bridge, connect it to your local network, install the app, connect your lights. Verify that you can control your lights as they should be controlled.
+ Install the Hue Bridge, connect it to your local network, install the Hue app, connect your lights. Verify that you can control your lights as they should be controlled.
 
  The code needs some Python libraries. These can be installed with the line below, just in case they are not already installed:
 
@@ -60,6 +60,34 @@ If you don't specify any of these input arguments or you try to do something sil
 
  This is pretty much all you need, now you can start using it.
 
-## Verification and results
+## Chromaticity replication accuracy tests and results
 
-...as and when I can get my hands on a chromameter and create a set-up where I can make some precision optical measurements. These instruments are not cheap, and it is very difficult to get surfaces that are pure white or pure black.
+All my lights are the 800-lumen 'White and colour ambinance' of 'Gamut type C' which is probably the latest (2016 onwards) one.
+
+The primaries are:
+
+| Colour | Chromaticity (x;y) |
+|--------|---------------|
+| Red | `0.6915; 0.3083` |
+| Green | `0.17; 0.7` |
+| Blue | `0.1532; 0.0475` |
+
+The following was measured with a Sekonic C800 chomameter. The lights were driven at 100% intensity, the instrument's rotatable diffuser was set to 'High', and it was directly in very close proximity of the body of the light. Several (4-5) measurements were taken for the same condition, there was no significant measurement between the measured values, so I did not include the raw data. As this instrument measures illumination and not light output, the intensity values are omitted.
+
+| Easy-to-remember name | Colour temperature | Chromaticity (x; y) as set | Chromaticity (x; y) as measured | Calculated colour temperature |
+|-----------------------|--------------------|------------------------|-----------------------------|-------------------------------|
+| Equal Energy | N/A | `0.33; 0.33` | `0.3274; 0.3255` | N/A |
+| D27 (Incandescent) | 2700K | `0.45986; 0.41060` | `0.4633; 0.4095` | 2644K |
+| D40 (Warm white) | 4000K | `0.38044; 0.37675` | `0.3819; 0.3780` | 3969K |
+| D65 (The default one) | 6500K | `0.31272; 0.32903` | `0.3106; 0.3253` | 6651K |
+| D76 (Cool white) | 7600K | `0.29924; 0.30911` | `0.2977; 0.3120` | 7657K |
+
+## A little bit of waffle at the end (discussion, conclusion, whatever)
+
+Perceptually, all the primary colours are deep and beautiful, and there was no observable difference in intensity and colour between light sources. The green one is the best one I have seen from a commercially available light. In literally every condition, I could see from the spectrum that the onboard MCU does its best to provide with a wide-spectrum light, at the desired chromaticity, with distinct peaks at the primary colours in the traditional blue-chip-illuminates-some-phosphor-type spectrum. I am even inclined to think that the slight difference between colour temperatures are originated from the limited measurement accuracy of the C800 chromameter. If I get really curious or hit an anomaly, I'll repeat these mesurements in a much more controlled environment and with a much more expensive (Minolta CS-150) device.
+
+I also noticed that the Hue app and this Python script can mutually control these lights. Not only that, but it is possible to save a 'scene' created with the Phyton script, in the Hue app. So, once the desired illumination settings are set, it is possible to recall them in the Hue app without using this Python script, and presumably even cycle across them with a Zigbee remote.
+
+So, anyway, if you are on a low budget, and you don't have the time to make and calibrate RGB lights yourself from scratch, these lights can be a reasonable compromise for illuminating your environment.
+
+That being said, I only have these 800-lumen 'White and colour ambiance' E27 lights, so I don't know if other Philips Hue products will work the same way.

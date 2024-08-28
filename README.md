@@ -72,7 +72,7 @@ The primaries are:
 | Green | `0.17; 0.7` |
 | Blue | `0.1532; 0.0475` |
 
-The following was measured with a Sekonic C800 chomameter. The lights were driven at 100% intensity, the instrument's rotatable diffuser was set to 'High', and it was directly in very close proximity of the body of the light. Several (4-5) measurements were taken for the same condition, there was no significant measurement between the measured values, so I did not include the raw data. As this instrument measures illumination and not light output, the intensity values are omitted.
+The following was measured with a Sekonic C800 chromameter. The lights were driven at 100% intensity, the instrument's rotatable diffuser was set to 'High', and it was directly in very close proximity of the body of the light. Several (4-5) measurements were taken for the same condition, there was no significant measurement between the measured values, so I did not include the raw data. As this instrument measures illumination and not light output, the intensity values are omitted.
 
 | Easy-to-remember name | Colour temperature | Chromaticity (x; y) as set | Chromaticity (x; y) as measured | Calculated colour temperature |
 |-----------------------|--------------------|------------------------|-----------------------------|-------------------------------|

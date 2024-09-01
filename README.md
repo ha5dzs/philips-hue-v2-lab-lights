@@ -77,8 +77,8 @@ The following was measured with a Sekonic C800 chromameter. The lights were driv
 | Easy-to-remember name | Colour temperature | Chromaticity (x; y) as set | Chromaticity (x; y) as measured | Calculated colour temperature |
 |-----------------------|--------------------|------------------------|-----------------------------|-------------------------------|
 | Equal Energy | N/A | `0.33; 0.33` | `0.3274; 0.3255` | N/A |
-| D27 (Incandescent) | 2700K | `0.45986; 0.41060` | `0.4633; 0.4095` | 2644K |
-| D40 (Warm white) | 4000K | `0.38044; 0.37675` | `0.3819; 0.3780` | 3969K |
+| Incandescent | 2700K | `0.45986; 0.41060` | `0.4633; 0.4095` | 2644K |
+| Warm white | 4000K | `0.38044; 0.37675` | `0.3819; 0.3780` | 3969K |
 | D65 (The default one) | 6500K | `0.31272; 0.32903` | `0.3106; 0.3253` | 6651K |
 | D76 (Cool white) | 7600K | `0.29924; 0.30911` | `0.2977; 0.3120` | 7657K |
 

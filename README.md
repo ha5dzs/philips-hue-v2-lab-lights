@@ -40,7 +40,9 @@ Initially, you'll need to press the button on the Hue Bridge to create your key.
 
 The first and second arguments are the CIE 1931 chromaticity coordinates, and the third argument is the intensity in percent [0 ... 100%].
 
-If you don't specify any of these input arguments or you try to do something silly such as giving impossible colours, the code will set your lights to these above values. You will get an error message in the console. If the error message comes from the script, it will be clear and straightforward, if it comes from the light system, you will get a json object and you have to manually process it. The code sets the lights so that the last values are set are used as defaults when they are power-cycled. So, next time you turn these on, they will be exactly the same how you set them.
+If you don't specify any of these input arguments or you try to do something silly such as giving impossible colours, the code will set your lights to these above values. You will get an error message in the console. If the error message comes from the script, it will be clear and straightforward, if it comes from the light system, you will get a json object and you have to manually process it.
+
+While there are facilities to save the power-up defaults in these lights, these are commented-out in `lablight.py` lines 136-151, to ensure compatibility with the Ikea Trådfri lights.
 
 **note**: There are some sanity checks and error management in the code, but it is not entirely foolproof. There are better and more user-friendly solutions for end-users. I just got upset that I couldn't calibrate these lights easily and threw in about 10 hours of work (of reading, some programming, testing, and documenting and admittedly some swearing about what happened to 'let's make things better') to make this.
 
@@ -84,10 +86,10 @@ The following was measured with a Sekonic C800 chromameter. The lights were driv
 
 ## A little bit of waffle at the end (discussion, conclusion, whatever)
 
-Perceptually, all the primary colours are deep and beautiful, and there was no observable difference in intensity and colour between light sources. The green one is the best one I have seen from a commercially available light. In literally every condition, I could see from the spectrum that the onboard MCU does its best to provide with a wide-spectrum light, at the desired chromaticity, with distinct peaks at the primary colours in the traditional blue-chip-illuminates-some-phosphor-type spectrum. I am even inclined to think that the slight difference between colour temperatures are originated from the limited measurement accuracy of the C800 chromameter. If I get really curious or hit an anomaly, I'll repeat these mesurements in a much more controlled environment and with a much more expensive (Minolta CS-150) device.
+Perceptually, all the primary colours are deep and beautiful, and there was no observable difference in intensity and colour between light sources. The green one is the best one I have seen from a commercially available light. In literally every condition, I could see from the spectrum that the onboard MCU does its best to provide with a wide-spectrum light, at the desired chromaticity, with distinct peaks at the primary colours in the traditional blue-chip-illuminates-some-phosphor-type spectrum. I am even inclined to think that the slight difference between colour temperatures are originated from the limited measurement accuracy of the C800 chromameter. If I get really curious or hit an anomaly, I'll repeat these measurements in a much more controlled environment and with a much more expensive (Minolta CS-150) device.
 
 I also noticed that the Hue app and this Python script can mutually control these lights. Not only that, but it is possible to save a 'scene' created with the Phyton script, in the Hue app. So, once the desired illumination settings are set, it is possible to recall them in the Hue app without using this Python script, and presumably even cycle across them with a Zigbee remote.
 
 So, anyway, if you are on a low budget, and you don't have the time to make and calibrate RGB lights yourself from scratch, these lights can be a reasonable compromise for illuminating your environment.
 
-That being said, I only have these 800-lumen 'White and colour ambiance' E27 lights, so I don't know if other Philips Hue products will work the same way.
+That being said, I only have these 800-lumen and 1100-lumen 'White and colour ambiance' E27 lights, which I have verified the colour fidelity. I am also getting reasonable results with the Trådfri lights, except for any chromaticity where green is required. The green primaries in the Trådfri lights are awful.

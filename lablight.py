@@ -8,7 +8,7 @@ import sys # For processing input arguments
 
 # Input variables. D65 illuminant, max intensity
 cie_x = 0.31272
-cie_y = 0.2903
+cie_y = 0.32903
 intensity = 100 # in percent
 
 
@@ -20,7 +20,7 @@ urllib3.disable_warnings(category=urllib3.exceptions.InsecureRequestWarning)
 requests.adapters.DEFAULT_RETRIES = 256
 
 # If you don't know your bridge's IP address, then check here: https://discovery.meethue.com/
-local_ip = "192.168.11.50"
+local_ip = "192.168.42.132"
 
 # We will overwrite these programmatically.
 username = "Bruce Wayne"
@@ -133,6 +133,24 @@ for light_address in range(0, no_of_lights):
 
 # For each light, set the intensity and chromaticity values. These are the same, so we can assemble the control command manually.
 
+#light_control_properties = {
+#     "on": { "on": True },
+#     "dimming": { "brightness": intensity },
+#     "color":   {"xy":  {
+#                            "x": cie_x,
+#                            "y": cie_y
+#                        }
+#                },
+#    "powerup": {"preset": "custom",
+#                "mode": "color",
+#                "xy":   {
+#                            "x": cie_x,
+#                            "y": cie_y
+#                        }
+#                }
+#}
+
+# Ikea tradfri lights do not support powerup preset.
 light_control_properties = {
      "on": { "on": True },
      "dimming": { "brightness": intensity },
@@ -140,15 +158,9 @@ light_control_properties = {
                             "x": cie_x,
                             "y": cie_y
                         }
-                },
-    "powerup": {"preset": "custom",
-                "mode": "color",
-                "xy":   {
-                            "x": cie_x,
-                            "y": cie_y
-                        }
                 }
 }
+
 
 for light_id in range(0, no_of_lights):
     try:
